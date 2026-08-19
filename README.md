@@ -1,4 +1,4 @@
-FP32 Matrix-Vector Engine (Versal DSPFP32)
+# FP32 Matrix-Vector Engine (Versal DSPFP32)
 
 An FPGA compute engine that performs a full single-precision (FP32)
 GEMV — `[1 x 4096] . [4096 x 4096] -> [1 x 4096]` — entirely in hardware,
@@ -78,22 +78,9 @@ memory_and_vpu.srcs/
  │    ├── accum_adder16.sv / vecadd_fsm.sv  shared FP32 vector-add bank
  │    ├── activations_bram.sv / weight_uram.sv / output_bram.sv   storage wrappers
  │    └── bram_tdp_init.sv / uram_tdp_init.sv                     generic dual-port memory
- └── sim_1/new/          Testbenches (see below)
+ └── sim_1/new/          
 ```
 
-## Simulating
-
-Open `memory_and_vpu.xpr` in Vivado, or run the simulator directly on the
-sources under `memory_and_vpu.srcs/sim_1/new/`. Testbenches are organized
-bottom-up, matching the hierarchy:
-
-| Testbench | Exercises |
-|---|---|
-| `tb_vpu.sv` | `vpu` — single 256-deep dot product, used to verify/tune `PIPE_LATENCY` |
-| `vecadd_tb.sv` | `vecadd_fsm` + `accum_adder16` — the shared FP32 adder bank |
-| `mpu_tb.sv` | `mpu_top` — one 256x256 tile, including the weight prefetch |
-| `group_tb.sv`, `reload_group_tb.sv`, `group2pass_tb.sv` | `group_top` — chunked reduction and multi-pass reload |
-| `mpe_tb.sv`, `mpe2g_tb.sv`, `mpe8small_tb.sv`, `mpe8mid_tb.sv`, `mpe8fulld_tb.sv` | `mpe_top` at increasing scale (2 groups up to the full 8-group / full-depth configuration) |
 
 ## Status / known caveats
 
@@ -112,10 +99,9 @@ bottom-up, matching the hierarchy:
 A detailed, cross-linked documentation set — system overview, the DSPFP32
 primitive, and a dedicated architecture + linkage document for every level
 (VPU, MPU, Group, MPE) plus the shared memory primitives — is maintained
-alongside this project. If you're setting this repo up on GitHub, add
-those docs under a `docs/` folder at the repo root and they'll cross-link
-correctly using relative paths back into `memory_and_vpu.srcs/sources_1/new/`.
+alongside this project. 
 
 ## License
 
-No license file is currently included in this repository. 
+No license file is currently included in this repository. Add one
+(e.g. `LICENSE`) before treating this as open source.
