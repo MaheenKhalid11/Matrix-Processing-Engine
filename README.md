@@ -1,4 +1,4 @@
-# memory_and_vpu — FP32 Matrix-Vector Engine (Versal DSPFP32)
+FP32 Matrix-Vector Engine (Versal DSPFP32)
 
 An FPGA compute engine that performs a full single-precision (FP32)
 GEMV — `[1 x 4096] . [4096 x 4096] -> [1 x 4096]` — entirely in hardware,
